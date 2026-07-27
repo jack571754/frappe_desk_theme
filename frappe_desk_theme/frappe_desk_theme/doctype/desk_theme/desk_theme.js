@@ -523,11 +523,17 @@ function render_preset_cards_in_form(frm) {
 }
 
 /**
- * 填充预设属性到表单
+ * 填充预设属性到表单（包含字段存在性安全校验）
  */
 function apply_preset_values_to_form(frm, preset) {
+	if (frm.fields_dict.preset_theme) {
+		frm.set_value('preset_theme', preset.select_val);
+	}
+	
 	Object.keys(preset.values).forEach(key => {
-		frm.set_value(key, preset.values[key]);
+		if (frm.fields_dict[key]) {
+			frm.set_value(key, preset.values[key]);
+		}
 	});
 
 	frappe.show_alert({
@@ -604,7 +610,6 @@ function open_crm_theme_presets_dialog(frm) {
 			const presetId = $(this).attr('data-id');
 			const targetPreset = CRM_THEME_PRESETS.find(p => p.id === presetId);
 			if (targetPreset) {
-				frm.set_value('preset_theme', targetPreset.select_val);
 				apply_preset_values_to_form(frm, targetPreset);
 				d.hide();
 				frm.save();
@@ -612,6 +617,7 @@ function open_crm_theme_presets_dialog(frm) {
 		});
 	}, 100);
 }
+
 
 
 
