@@ -424,7 +424,7 @@
    "description": "Hide search box for user roles",
    "fieldname": "hide_search",
    "fieldtype": "Table MultiSelect",
-   "label": "Hide Search ",
+   "label": "Hide Search",
    "options": "Has Role"
   },
   {

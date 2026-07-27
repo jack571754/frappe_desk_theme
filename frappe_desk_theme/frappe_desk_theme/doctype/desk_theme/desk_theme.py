@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 
@@ -9,14 +10,14 @@ class DeskTheme(Document):
 	def validate(self):
 		# Validate that default_app is set when hide_app_switcher is checked
 		if self.hide_app_switcher and not self.default_app:
-			frappe.throw("Default App is required when App Switcher is hidden")
+			frappe.throw(_("Default App is required when App Switcher is hidden"))
 
 		# Carousel validation: if carousel selected, must have at least one image
 		if self.page_background_type == "Carousel":
 			if not self.carousel_images or not any(img.image for img in self.carousel_images):
 				# Fallback: clear page_background_type
 				self.page_background_type = ""
-				frappe.msgprint("No carousel images found. Falling back to default background.")
+				frappe.msgprint(_("No carousel images found. Falling back to default background."))
 
 	def on_update(self):
 		# Update system settings with the selected default app
@@ -64,7 +65,7 @@ def update_system_default_app(default_app):
 		# Check if the app exists in installed apps
 		installed_apps = frappe.get_installed_apps()
 		if default_app not in installed_apps:
-			frappe.throw(f"App '{default_app}' is not installed")
+			frappe.throw(_("App '{0}' is not installed").format(default_app))
 		
 		# Update system settings
 		system_settings = frappe.get_single("System Settings")
@@ -74,4 +75,4 @@ def update_system_default_app(default_app):
 		return {"success": True}
 	except Exception as e:
 		frappe.log_error(f"Error updating system default app: {str(e)}")
-		frappe.throw(f"Failed to update system default app: {str(e)}")
+		frappe.throw(_("Failed to update system default app: {0}").format(str(e)))

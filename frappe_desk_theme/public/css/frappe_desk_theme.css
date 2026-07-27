@@ -288,19 +288,18 @@ body {
 }
 
 /* Sidebar items - all text elements in sidebar navigation */
-.standard-sidebar-item,
-.item-anchor,
+.standard-sidebar-item:not(.selected):not(.active),
+.item-anchor:not(.selected):not(.active),
 .sidebar-item-label,
 .sidebar-item-icon,
-.sidebar-item-icon svg,
 .sidebar-item-control button {
-    color: var(--sidebar-text-color,#525252) !important;
+    color: var(--sidebar-text-color,#525252);
 }
 
 /* Sidebar icons - SVG elements with proper fill and stroke colors */
 .sidebar-item-icon svg {
-    fill: var(--sidebar-bg,#f8f8f8) !important;
-    stroke: var(--sidebar-text-color,#525252) !important;
+    fill: transparent;
+    stroke: var(--sidebar-text-color,#525252);
 }
 
 /* ========================================
@@ -620,10 +619,35 @@ body, button, input, select, textarea, .form-control, .grid-row, .tree-node, .st
 }
 
 /* 4. 侧边栏选中高亮与圆角包覆对比度修复 (Sidebar Active/Hover Contrast Fix) */
-.standard-sidebar-item.selected,
-.standard-sidebar-item.active,
+
+/* 未选中项悬浮背景微效果 */
+.sidebar-item-container:not(.active):not(.selected):hover,
+.standard-sidebar-item:not(.active):not(.selected):hover,
+.desk-sidebar .sidebar-item-container:not(.active):not(.selected):hover,
+.desk-sidebar .standard-sidebar-item:not(.active):not(.selected):hover {
+    background-color: rgba(125, 125, 125, 0.15) !important;
+    border-radius: 6px !important;
+}
+
+/* 选中激活项圆角包覆与对比背景 */
+.sidebar-item-container.active,
 .sidebar-item-container.selected,
-.standard-sidebar-item:hover {
+.sidebar-item-container[data-is-active="true"],
+.sidebar-item-container.is-active,
+.standard-sidebar-item.active,
+.standard-sidebar-item.selected,
+.desk-sidebar .sidebar-item-container.active,
+.desk-sidebar .sidebar-item-container.selected,
+.desk-sidebar .standard-sidebar-item.active,
+.desk-sidebar .standard-sidebar-item.selected,
+.desk-sidebar .item-anchor.active,
+.desk-sidebar .item-anchor.selected,
+.desk-sidebar-item.active,
+.desk-sidebar-item.selected,
+.sidebar-section .active,
+.sidebar-section .selected,
+.body-sidebar .active,
+.body-sidebar .selected {
     background-color: var(--btn-primary-bg, #0052D9) !important;
     border-radius: 6px !important;
     transition: all 0.15s ease-in-out !important;
@@ -631,27 +655,53 @@ body, button, input, select, textarea, .form-control, .grid-row, .tree-node, .st
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* 选中或悬浮时强行设定全文字、标签与图标颜色为高亮纯白 */
-.standard-sidebar-item.selected *,
-.standard-sidebar-item.active *,
+/* 选中激活项文字、标签与图标颜色统一为高对比色 var(--btn-primary-color, #FFFFFF) */
+.sidebar-item-container.active *,
 .sidebar-item-container.selected *,
-.standard-sidebar-item:hover *,
-.standard-sidebar-item.selected .sidebar-item-label,
-.standard-sidebar-item.active .sidebar-item-label,
+.sidebar-item-container[data-is-active="true"] *,
+.sidebar-item-container.is-active *,
+.standard-sidebar-item.active *,
+.standard-sidebar-item.selected *,
+.desk-sidebar .sidebar-item-container.active *,
+.desk-sidebar .sidebar-item-container.selected *,
+.desk-sidebar .standard-sidebar-item.active *,
+.desk-sidebar .standard-sidebar-item.selected *,
+.desk-sidebar .item-anchor.active *,
+.desk-sidebar .item-anchor.selected *,
+.desk-sidebar-item.active *,
+.desk-sidebar-item.selected *,
+.sidebar-section .active *,
+.sidebar-section .selected *,
+.body-sidebar .active *,
+.body-sidebar .selected *,
+.sidebar-item-container.active .sidebar-item-label,
 .sidebar-item-container.selected .sidebar-item-label,
-.standard-sidebar-item:hover .sidebar-item-label,
-.standard-sidebar-item.selected a,
-.standard-sidebar-item.active a,
+.desk-sidebar .sidebar-item-container.active .sidebar-item-label,
+.desk-sidebar .sidebar-item-container.selected .sidebar-item-label,
+.standard-sidebar-item.active .sidebar-item-label,
+.standard-sidebar-item.selected .sidebar-item-label,
+.sidebar-item-container.active a,
 .sidebar-item-container.selected a,
-.standard-sidebar-item:hover a,
-.standard-sidebar-item.selected span,
-.standard-sidebar-item.active span,
+.sidebar-item-container.active span,
 .sidebar-item-container.selected span,
-.standard-sidebar-item:hover span {
-    color: #FFFFFF !important;
-    fill: #FFFFFF !important;
-    stroke: #FFFFFF !important;
+.sidebar-item-container.active p,
+.sidebar-item-container.selected p,
+.sidebar-item-container.active div,
+.sidebar-item-container.selected div {
+    color: var(--btn-primary-color, #FFFFFF) !important;
+    fill: var(--btn-primary-color, #FFFFFF) !important;
+    stroke: var(--btn-primary-color, #FFFFFF) !important;
     font-weight: 600 !important;
+}
+
+.sidebar-item-container.active .sidebar-item-icon svg,
+.sidebar-item-container.selected .sidebar-item-icon svg,
+.standard-sidebar-item.active .sidebar-item-icon svg,
+.standard-sidebar-item.selected .sidebar-item-icon svg,
+.desk-sidebar .active .sidebar-item-icon svg,
+.desk-sidebar .selected .sidebar-item-icon svg {
+    stroke: var(--btn-primary-color, #FFFFFF) !important;
+    fill: var(--btn-primary-color, #FFFFFF) !important;
 }
 
 /* 5. 现代化卡片与弹窗微阴影与圆角 */
@@ -669,6 +719,45 @@ body, button, input, select, textarea, .form-control, .grid-row, .tree-node, .st
     color: #4E5969 !important;
     background-color: #F7F8FA !important;
 }
+
+/* 7. 工作台/Desk 页面 Header、Tab 与侧边栏对齐优化 */
+.page-head .container,
+.page-head .page-head-content,
+[data-page-route="Workspaces"] .page-head .container,
+[data-page-route="Workspaces"] .page-head .page-head-content,
+body[data-route^="desk/"] .page-head .container,
+body[data-route^="desk/"] .page-head .page-head-content {
+    margin-left: 0 !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    max-width: 100% !important;
+}
+
+[data-page-route="Workspaces"] .layout-main-section,
+body[data-route^="desk/"] .layout-main-section {
+    margin-left: 0 !important;
+}
+
+/* 侧边栏图标与文本垂直居中及边距对齐 */
+.sidebar-item-container .standard-sidebar-item,
+.desk-sidebar .standard-sidebar-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.sidebar-item-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+
+.sidebar-item-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
 
 
 
