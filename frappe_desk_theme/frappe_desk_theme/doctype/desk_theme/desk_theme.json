@@ -5,6 +5,10 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "preset_theme_tab",
+  "preset_theme_section",
+  "preset_theme",
+  "preset_theme_html",
   "login_page_tab",
   "login_page_section",
   "login_button_background_color",
@@ -87,6 +91,28 @@
   "footer_text_color"
  ],
  "fields": [
+  {
+   "fieldname": "preset_theme_tab",
+   "fieldtype": "Tab Break",
+   "label": "预设主题库"
+  },
+  {
+   "fieldname": "preset_theme_section",
+   "fieldtype": "Section Break",
+   "label": "中国主流 CRM & ERP 预设主题方案"
+  },
+  {
+   "default": "Custom",
+   "fieldname": "preset_theme",
+   "fieldtype": "Select",
+   "label": "预设主题方案",
+   "options": "Custom\nTech Blue (经典商务蓝 - 纷享销客/销售易风)\nFeishu Light (极简飞书风 - 飞书/钉钉纯白高雅)\nChinese Red (尊贵中国红 - 国企/政企/大型制造)\nEmerald Green (翡翠智造绿 - 用友/鼎捷 ERP 风)\nObsidian Gold (曜石黑金 - 字节/高定品牌风)\nPurple Tech (紫金未来 - AI/大模型科技风)\nTeal Harmony (青翠和弦 - 医药/医疗/新能源)\nDark Mode (高级暗黑夜色 - 护眼极客模式)"
+  },
+  {
+   "fieldname": "preset_theme_html",
+   "fieldtype": "HTML",
+   "label": "预设主题卡片选择器"
+  },
   {
    "fieldname": "navbar_section",
    "fieldtype": "Section Break"
