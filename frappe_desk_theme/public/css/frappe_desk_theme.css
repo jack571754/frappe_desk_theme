@@ -287,19 +287,101 @@ body {
     color: var(--sidebar-text-color,#525252) !important;
 }
 
-/* Sidebar items - all text elements in sidebar navigation */
-.standard-sidebar-item:not(.selected):not(.active),
-.item-anchor:not(.selected):not(.active),
-.sidebar-item-label,
-.sidebar-item-icon,
+/* Sidebar items - unselected text elements in sidebar navigation */
+.standard-sidebar-item:not(.selected):not(.active):not(.active-sidebar) .sidebar-item-label,
+.standard-sidebar-item:not(.selected):not(.active):not(.active-sidebar) .sidebar-item-icon,
+.sidebar-item-container:not(.selected):not(.active):not(.active-sidebar) .sidebar-item-label,
+.sidebar-item-container:not(.selected):not(.active):not(.active-sidebar) .sidebar-item-icon,
+.item-anchor:not(.selected):not(.active):not(.active-sidebar),
 .sidebar-item-control button {
     color: var(--sidebar-text-color,#525252);
 }
 
-/* Sidebar icons - SVG elements with proper fill and stroke colors */
-.sidebar-item-icon svg {
+/* Sidebar icons - unselected SVG elements */
+.standard-sidebar-item:not(.selected):not(.active):not(.active-sidebar) .sidebar-item-icon svg,
+.sidebar-item-container:not(.selected):not(.active):not(.active-sidebar) .sidebar-item-icon svg {
     fill: transparent;
     stroke: var(--sidebar-text-color,#525252);
+}
+
+/* Sidebar hover state styling */
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):not(.active):hover,
+.body-sidebar .sidebar-item-container:not(.active-sidebar):not(.selected):not(.active):hover {
+    background-color: var(--sidebar-hover-bg, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):not(.active):hover .sidebar-item-label,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):not(.active):hover .sidebar-item-icon,
+.body-sidebar .sidebar-item-container:not(.active-sidebar):not(.selected):not(.active):hover .sidebar-item-label,
+.body-sidebar .sidebar-item-container:not(.active-sidebar):not(.selected):not(.active):hover .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):not(.active):hover a {
+    color: var(--sidebar-hover-text-color, var(--sidebar-text-color, #ffffff)) !important;
+}
+
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):not(.selected):not(.active):hover .sidebar-item-icon svg,
+.body-sidebar .sidebar-item-container:not(.active-sidebar):not(.selected):not(.active):hover .sidebar-item-icon svg {
+    stroke: var(--sidebar-hover-text-color, var(--sidebar-text-color, #ffffff)) !important;
+}
+
+/* Sidebar selected and active state background */
+.active-sidebar,
+.standard-sidebar-item.active-sidebar,
+.sidebar-item-container.active-sidebar,
+.body-sidebar .active-sidebar,
+.body-sidebar .standard-sidebar-item.active-sidebar,
+.body-sidebar .standard-sidebar-item.selected,
+.body-sidebar .standard-sidebar-item.active,
+.body-sidebar .sidebar-item-container.active-sidebar,
+.body-sidebar .sidebar-item-container.selected,
+.body-sidebar .sidebar-item-container.active {
+    background-color: var(--sidebar-selected-bg, #0052d9) !important;
+}
+
+/* Sidebar selected and active state text & icon label color */
+.active-sidebar .sidebar-item-label,
+.active-sidebar .sidebar-item-icon,
+.active-sidebar a,
+.active-sidebar span,
+.standard-sidebar-item.active-sidebar .sidebar-item-label,
+.sidebar-item-container.active-sidebar .sidebar-item-label,
+.body-sidebar .active-sidebar,
+.body-sidebar .active-sidebar *,
+.body-sidebar .active-sidebar .sidebar-item-label,
+.body-sidebar .active-sidebar .sidebar-item-icon,
+.body-sidebar .active-sidebar a,
+.body-sidebar .active-sidebar span,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.active .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.active .sidebar-item-icon,
+.body-sidebar .sidebar-item-container.active-sidebar .sidebar-item-label,
+.body-sidebar .sidebar-item-container.active-sidebar .sidebar-item-icon,
+.body-sidebar .sidebar-item-container.selected .sidebar-item-label,
+.body-sidebar .sidebar-item-container.selected .sidebar-item-icon,
+.body-sidebar .sidebar-item-container.active .sidebar-item-label,
+.body-sidebar .sidebar-item-container.active .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.selected a,
+.body-sidebar .standard-sidebar-item.active a {
+    color: var(--sidebar-selected-text-color, #ffffff) !important;
+}
+
+/* Sidebar selected and active state icon SVG stroke */
+.active-sidebar svg,
+.active-sidebar .sidebar-item-icon svg,
+.standard-sidebar-item.active-sidebar .sidebar-item-icon svg,
+.sidebar-item-container.active-sidebar .sidebar-item-icon svg,
+.body-sidebar .active-sidebar svg,
+.body-sidebar .active-sidebar .sidebar-item-icon svg,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon svg,
+.body-sidebar .standard-sidebar-item.selected .sidebar-item-icon svg,
+.body-sidebar .standard-sidebar-item.active .sidebar-item-icon svg,
+.body-sidebar .sidebar-item-container.active-sidebar .sidebar-item-icon svg,
+.body-sidebar .sidebar-item-container.selected .sidebar-item-icon svg,
+.body-sidebar .sidebar-item-container.active .sidebar-item-icon svg {
+    stroke: var(--sidebar-selected-text-color, #ffffff) !important;
+    fill: transparent !important;
 }
 
 /* ========================================
