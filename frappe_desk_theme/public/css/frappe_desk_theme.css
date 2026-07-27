@@ -565,3 +565,81 @@ body.has-sticky-footer:not(:has(.main-section)) {
     right: 20px;
 }
 
+/* ========================================
+   CHINESE CRM STYLE ERGONOMIC ENHANCEMENTS
+   ======================================== */
+
+/* 1. 中文字体渲染优化与字号层级 */
+body, button, input, select, textarea, .form-control, .grid-row, .tree-node, .standard-sidebar-item {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Source Han Sans SC", sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. 极窄 Slim 滚动条美化 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* 3. 中国式 CRM 高效对比状态标签与胶囊 Badge */
+.indicator.blue, .badge-blue, .indicator-pill.blue {
+    background-color: #E6F7FF !important;
+    color: #1890FF !important;
+    border: 1px solid #91D5FF !important;
+}
+.indicator.green, .badge-green, .indicator-pill.green {
+    background-color: #F6FFED !important;
+    color: #52C41A !important;
+    border: 1px solid #B7EB8F !important;
+}
+.indicator.orange, .badge-orange, .indicator-pill.orange {
+    background-color: #FFF7E6 !important;
+    color: #FA8C16 !important;
+    border: 1px solid #FFD591 !important;
+}
+.indicator.red, .badge-red, .indicator-pill.red {
+    background-color: #FFF1F0 !important;
+    color: #F5222D !important;
+    border: 1px solid #FFA39E !important;
+}
+.indicator.gray, .badge-gray, .indicator-pill.gray {
+    background-color: #FAFAFA !important;
+    color: #8C8C8C !important;
+    border: 1px solid #D9D9D9 !important;
+}
+
+/* 4. 侧边栏选中高亮与圆角包覆 */
+.standard-sidebar-item.selected,
+.standard-sidebar-item.active {
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+}
+
+/* 5. 现代化卡片与弹窗微阴影与圆角 */
+.layout-main-section, .modal-content, .frappe-card {
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* 6. 高密度表头与悬浮斑马线列表优化 */
+.dt-row:hover {
+    background-color: rgba(24, 144, 255, 0.04) !important;
+}
+.dt-cell--header {
+    font-weight: 600 !important;
+    color: #4E5969 !important;
+    background-color: #F7F8FA !important;
+}
+
+
