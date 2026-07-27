@@ -619,10 +619,38 @@ body, button, input, select, textarea, .form-control, .grid-row, .tree-node, .st
     border: 1px solid #D9D9D9 !important;
 }
 
-/* 4. 侧边栏选中高亮与圆角包覆 */
+/* 4. 侧边栏选中高亮与圆角包覆对比度修复 (Sidebar Active/Hover Contrast Fix) */
 .standard-sidebar-item.selected,
-.standard-sidebar-item.active {
+.standard-sidebar-item.active,
+.sidebar-item-container.selected,
+.standard-sidebar-item:hover {
+    background-color: var(--btn-primary-bg, #0052D9) !important;
     border-radius: 6px !important;
+    transition: all 0.15s ease-in-out !important;
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 选中或悬浮时强行设定全文字、标签与图标颜色为高亮纯白 */
+.standard-sidebar-item.selected *,
+.standard-sidebar-item.active *,
+.sidebar-item-container.selected *,
+.standard-sidebar-item:hover *,
+.standard-sidebar-item.selected .sidebar-item-label,
+.standard-sidebar-item.active .sidebar-item-label,
+.sidebar-item-container.selected .sidebar-item-label,
+.standard-sidebar-item:hover .sidebar-item-label,
+.standard-sidebar-item.selected a,
+.standard-sidebar-item.active a,
+.sidebar-item-container.selected a,
+.standard-sidebar-item:hover a,
+.standard-sidebar-item.selected span,
+.standard-sidebar-item.active span,
+.sidebar-item-container.selected span,
+.standard-sidebar-item:hover span {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
     font-weight: 600 !important;
 }
 
@@ -641,5 +669,6 @@ body, button, input, select, textarea, .form-control, .grid-row, .tree-node, .st
     color: #4E5969 !important;
     background-color: #F7F8FA !important;
 }
+
 
 
