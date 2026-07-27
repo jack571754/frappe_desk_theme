@@ -584,7 +584,13 @@ function open_crm_theme_presets_dialog(frm) {
 	const d = new frappe.ui.Dialog({
 		title: __('🎨 选择中国 CRM 风格预设主题'),
 		size: 'large',
-		content: html,
+		fields: [
+			{
+				fieldname: 'presets_cards_html',
+				fieldtype: 'HTML',
+				options: html
+			}
+		],
 		primary_action_label: __('关闭'),
 		primary_action() {
 			d.hide();
@@ -594,7 +600,7 @@ function open_crm_theme_presets_dialog(frm) {
 	d.show();
 
 	setTimeout(() => {
-		d.$wrapper.find('.crm-theme-card-dialog').on('click', function() {
+		d.fields_dict.presets_cards_html.$wrapper.find('.crm-theme-card-dialog').on('click', function() {
 			const presetId = $(this).attr('data-id');
 			const targetPreset = CRM_THEME_PRESETS.find(p => p.id === presetId);
 			if (targetPreset) {
@@ -604,7 +610,8 @@ function open_crm_theme_presets_dialog(frm) {
 				frm.save();
 			}
 		});
-	}, 200);
+	}, 100);
 }
+
 
 
