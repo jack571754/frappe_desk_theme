@@ -76,3 +76,71 @@ def update_system_default_app(default_app):
 	except Exception as e:
 		frappe.log_error(f"Error updating system default app: {str(e)}")
 		frappe.throw(_("Failed to update system default app: {0}").format(str(e)))
+
+
+@frappe.whitelist()
+def reset_default_theme():
+	"""Reset Desk Theme single doctype to standard default settings"""
+	try:
+		theme = frappe.get_doc("Desk Theme")
+		theme.preset_theme = "Tech Blue (经典商务蓝 - 纷享销客/销售易风)"
+		
+		default_values = {
+			"navbar_color": "#0052D9",
+			"navbar_text_color": "#FFFFFF",
+			"sidebar_background_color": "#001529",
+			"sidebar_text_color": "#E6F7FF",
+			"button_background_color": "#0052D9",
+			"button_hover_background_color": "#0039B3",
+			"button_text_color": "#FFFFFF",
+			"button_hover_text_color": "#FFFFFF",
+			"secondary_button_background_color": "#F0F2F5",
+			"secondary_button_hover_background_color": "#E4E7ED",
+			"secondary_button_text_color": "#1D2129",
+			"secondary_button_hover_text_color": "#0052D9",
+			"body_background_color": "#F2F3F5",
+			"main_body_content_box_background_color": "#FFFFFF",
+			"main_body_content_box_text_color": "#1D2129",
+			"table_head_background_color": "#F7F8FA",
+			"table_head_text_color": "#4E5969",
+			"table_body_background_color": "#FFFFFF",
+			"table_body_text_color": "#1D2129",
+			"number_card_background_color": "#FFFFFF",
+			"number_card_text_color": "#1D2129",
+			"number_card_border_color": "#E5E6EB",
+			"input_background_color": "#F7F8FA",
+			"input_border_color": "#E5E6EB",
+			"input_text_color": "#1D2129",
+			"input_label_color": "#4E5969",
+			"login_button_background_color": "#0052D9",
+			"login_page_button_hover_background_color": "#0039B3",
+			"login_button_text_color": "#FFFFFF",
+			"login_box_background_color": "#FFFFFF",
+			"login_page_background_color": "#F0F2F5",
+			"footer_background_color": "#001529",
+			"footer_text_color": "#8C8C8C",
+			"hide_app_switcher": 0,
+			"default_app": "",
+			"hide_help_button": 0,
+			"page_background_type": "",
+			"sticky_footer": 0,
+			"copyright_text": "",
+			"footer_powered_by": "",
+		}
+		
+		for key, val in default_values.items():
+			if hasattr(theme, key):
+				setattr(theme, key, val)
+
+		theme.set("hide_search", [])
+		theme.set("carousel_images", [])
+		theme.save(ignore_permissions=True)
+		
+		return {
+			"success": True,
+			"message": _("Theme reset to default successfully")
+		}
+	except Exception as e:
+		frappe.log_error(f"Error resetting desk theme: {str(e)}")
+		frappe.throw(_("Failed to reset desk theme: {0}").format(str(e)))
+

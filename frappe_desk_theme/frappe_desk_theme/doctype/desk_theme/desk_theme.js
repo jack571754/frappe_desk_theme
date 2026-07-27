@@ -388,6 +388,31 @@ frappe.ui.form.on("Desk Theme", {
 			open_crm_theme_presets_dialog(frm);
 		}).addClass('btn-primary');
 
+		// Add reset to default theme button
+		frm.add_custom_button(__('↺ 重置默认主题'), function() {
+			frappe.confirm(
+				__('确定要重置为系统默认主题吗？这将把所有配色与配置恢复为标准预设。'),
+				function() {
+					frappe.call({
+						method: "frappe_desk_theme.frappe_desk_theme.doctype.desk_theme.desk_theme.reset_default_theme",
+						freeze: true,
+						freeze_message: __('正在重置默认主题...'),
+						callback: function(r) {
+							if (r.message && r.message.success) {
+								window.frappeDeskTheme?.clearCache();
+								window.frappeDeskTheme?.refreshTheme();
+								frm.reload_doc();
+								frappe.show_alert({
+									message: __('主题已成功重置为默认设置'),
+									indicator: "green"
+								}, 5);
+							}
+						}
+					});
+				}
+			);
+		});
+
 		// Add refresh theme button       
 		frm.add_custom_button(__('刷新主题缓存'), function() {
 			window.frappeDeskTheme?.clearCache();
@@ -466,6 +491,9 @@ function render_preset_cards_in_form(frm) {
 			<span style="font-size: 13px; color: #666; font-weight: 500;">
 				👇 点击下方任意预设主题卡片，即可自动填充对应配色并保存切换：
 			</span>
+			<button class="btn btn-xs btn-default btn-reset-theme-in-form" style="display: inline-flex; align-items: center; gap: 4px; border-color: #FF4D4F; color: #FF4D4F; background: #FFF1F0; font-weight: 500;">
+				<span>↺ 重置默认主题</span>
+			</button>
 		</div>
 		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
 	`;
@@ -509,6 +537,32 @@ function render_preset_cards_in_form(frm) {
 	`;
 
 	frm.fields_dict.preset_theme_html.$wrapper.html(html);
+
+	// 绑定一键重置默认主题逻辑
+	frm.fields_dict.preset_theme_html.$wrapper.find('.btn-reset-theme-in-form').on('click', function(e) {
+		e.stopPropagation();
+		frappe.confirm(
+			__('确定要重置为系统默认主题吗？这将把所有配色与配置恢复为标准预设。'),
+			function() {
+				frappe.call({
+					method: "frappe_desk_theme.frappe_desk_theme.doctype.desk_theme.desk_theme.reset_default_theme",
+					freeze: true,
+					freeze_message: __('正在重置默认主题...'),
+					callback: function(r) {
+						if (r.message && r.message.success) {
+							window.frappeDeskTheme?.clearCache();
+							window.frappeDeskTheme?.refreshTheme();
+							frm.reload_doc();
+							frappe.show_alert({
+								message: __('主题已成功重置为默认设置'),
+								indicator: "green"
+							}, 5);
+						}
+					}
+				});
+			}
+		);
+	});
 
 	// 绑定卡片点击逻辑
 	frm.fields_dict.preset_theme_html.$wrapper.find('.in-form-theme-card').on('click', function() {
